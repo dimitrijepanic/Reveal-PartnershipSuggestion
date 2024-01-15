@@ -28,8 +28,9 @@
 -->
 ## SQL or NoSQL Discussion
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
+* Updates
+  - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
+  - Updates (Writes) will occur more commonly than reads? 
 * Sync Scrolling
   - While you type, LivePreview will automatically scroll to the current location you're editing.
 * GitHub Flavored Markdown  
