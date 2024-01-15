@@ -26,7 +26,7 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 -->
-## Key Features
+## SQL or NoSQL Discussion
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
