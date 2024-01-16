@@ -7,6 +7,7 @@ I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion i
    <img width="33%" alt="overview" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/6d29f5b9-58d5-494e-8cb3-41e54fe34474">
 </p>
 Future sections will go into more detail about each of the domain logic components.
+<\br>
 Author: Dimitrije Panic
 
 ## Cache Service
