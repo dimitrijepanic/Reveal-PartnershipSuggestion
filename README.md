@@ -2,7 +2,7 @@
 ## Overview
 Dear Reader,
 
-I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion in Java. Overall idea was to try to decouple the system services, while theoretically allowing for them to be expanded in the future, with adequate scallability patterns. The diagram below depicts the high level architecture of the system.
+I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion in Java. Overall idea was to try to decouple the system services, while theoretically allowing for them to be expanded in the future, with adequate scallability patterns. The diagram below depicts the high level architecture of the system. For adapters I have chosen to use the Dependecy Injection Pattern. The communication between services is done through Domain Objects, while sending requests to Adapters through Command, and lastly Data Transfer Objects are used to receive results from adapter method calls.
 <p align="center" width="100%">
    <img width="33%" alt="overview" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/6d29f5b9-58d5-494e-8cb3-41e54fe34474">
 </p>
@@ -20,48 +20,37 @@ It is used in 3 cases:
 
 Caching eviction policies should be further discussed, however nowaday Redis is even used as a full database.
 ## Suggestion Generating Service
+Suggestion Generating Service is the service that actually collects the suggestions, and then adds it to the Cache. Furthermore, it calls the Timer Start Service to start the timer for the first Email to be sent (possibly).
 ## Timer Receiver Service
+Timer Receiver Service receives the command acknowledging the previous timer expiration. First it collects the list from the cache, then compares it to updates done since the last timer expired. If there is still a need to send the email, it will do so. Lastly, it will return the list to the cache, and schedule a new timer by calling the timer start service.
 ## Timer Start Service
+Creating a seperate service that start the timer was done so we would have the logic that is reused in multiple services in one place.
 ## Suggestion Update Service
+Suggestion Update Service acknowledges the update and adds it to the cache, while also persisting it to the DB.
+It is important to note here is the Authentication done before? Is the Token already checked? Are we in a private network? I presume all the answers are "Yes".
 ## Testing 
+I have written 26 tests to cover both the Functional and Unit aspects.
 ## Future Works
+* Service Registry
+* Docker
 * Horizontal Scaling
-## SQL or NoSQL Discussion
+<!-- ## SQL or NoSQL Discussion
 
 * Updates
   - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
-  - Updates (Writes) will occur more commonly than reads? 
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+  - Updates (Writes) will occur more commonly than reads? -->
 
 ## How To Use
-
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+For the external jars it is mandatory to import the project into the prefered environment.
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
+# To download and start Redis
+$ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 
-# Go into the repository
-$ cd electron-markdownify
+$ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 
-# Install dependencies
-$ npm install
+$ sudo apt-get update
+$ sudo apt-get install redis
 
-# Run the app
-$ npm start
 ```
 
