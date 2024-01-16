@@ -33,6 +33,10 @@ Dear Reader,
 I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion in Java. Overall idea was to try to decouple the system services, while theoretically allowing for them to be expanded in the future, with adequate scallability patterns. The diagram below depicts the high level architecture of the system.
 <div style="text-align:center"><img width="342" alt="overview" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/6d29f5b9-58d5-494e-8cb3-41e54fe34474"> </div>
 
+<p align="center" width="100%">
+   <img width="33%" alt="overview" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/6d29f5b9-58d5-494e-8cb3-41e54fe34474">
+</p>
+
 ## Future Works
 * Horizontal Scaling
 ## SQL or NoSQL Discussion
