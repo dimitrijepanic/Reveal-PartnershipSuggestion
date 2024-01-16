@@ -26,6 +26,14 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 -->
+
+## Overview
+Dear Reader,
+
+I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion in Java. Overall idea was to try to decouple the system services, while theoretically allowing for them to be expanded in the future, which adequate scallability patterns.  
+
+## Future Works
+* Horizontal Scaling
 ## SQL or NoSQL Discussion
 
 * Updates
