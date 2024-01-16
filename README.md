@@ -6,11 +6,19 @@ I have implemented the Reveal Backend Engineer Project - PartnershipSuggestion i
 <p align="center" width="100%">
    <img width="33%" alt="overview" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/6d29f5b9-58d5-494e-8cb3-41e54fe34474">
 </p>
-Future sections will go into more detail about each of the domain logic components.
-<\br>
+Future sections will briefly go over each of the domain logic components.
+</br>
 Author: Dimitrije Panic
 
 ## Cache Service
+Having in mind the cost of fetching data from databases, I have added a caching/message broker service. Current implementation is using Redis, but this can be changed by implementing the CacheService interface. Redis was chosen as it very efficient for storing lists, while also allowing for easier use in multi-threaded environemnts because of its single thread nature. 
+
+It is used in 3 cases: 
+   * To store the pair (+companyId, list_of_suggestions) to allow for fast retrieval
+   * To store the pair (-companyId, mail_list) to allow for fast retrieval of what is the next email to be sent
+   * To store the pair (companyId, lsit_of_updates) so we can compare it to the current list and know which one have been Accepte/Declined
+
+Caching eviction policies should be further discussed, however nowaday Redis is even used as a full database.
 ## Suggestion Generating Service
 ## Timer Receiver Service
 ## Timer Start Service
