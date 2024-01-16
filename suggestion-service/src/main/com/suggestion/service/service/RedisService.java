@@ -15,7 +15,10 @@ import redis.clients.jedis.JedisPooled;
 public class RedisService implements CacheService {
 
 	private JedisPooled jedis;
-	
+	/*
+	 * Add to the end of the list the current company suggestions
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public Response addCompanySuggestions(Company company) {
 		try {
@@ -29,6 +32,10 @@ public class RedisService implements CacheService {
 		return Response.SUCCESS;
 	}
 
+	/*
+	 * Add in reverse order the timer Events
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public Response addTimerEvents(Company company, List<TimerEvent> timerEvents) {
 		try {
@@ -44,6 +51,10 @@ public class RedisService implements CacheService {
 		return Response.SUCCESS;
 	}
 
+	/*
+	 * Add to the cache the updated Suggestion with its new Status
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public Response updateSuggestion(Suggestion suggestion) {
 		
@@ -56,6 +67,11 @@ public class RedisService implements CacheService {
 		return Response.SUCCESS;
 	}
 
+	/*
+	 * connect to the database with the preffered host and port
+	 * The service must be running on the machine/port
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public Response connect(String host, int port) {
 		try {
@@ -76,6 +92,10 @@ public class RedisService implements CacheService {
 		return Response.SUCCESS;
 	}
 
+	/*
+	 * get the next timer event from the sorted list
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public Object getNextTimerEvent(Company company) {
 		String value = "";
@@ -87,17 +107,23 @@ public class RedisService implements CacheService {
 		return value;
 	}
 
+	/*
+	 * empty redis completely
+	 */
 	@Override
 	public void clearCache() {
 		jedis.flushAll();
 	}
-
+	
+	/*
+	 * Collect the currently not updated suggestions
+	 * @return Response(Fail or Success)
+	 */
 	@Override
 	public List<String> getCurrentSuggestions(Company company) {
 		try {
 			Set<String> suggestionIds = new HashSet<>();
-			
-//			System.out.println(company.getCompanyId());
+
 			String value = jedis.rpop("+" + company.getCompanyId());
 			while(value != null && value != "") {
 				suggestionIds.add(value);

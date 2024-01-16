@@ -3,7 +3,6 @@ package com.suggestion.service.service.command;
 public class UpdateSuggestionStatusCommand {
 	private String companyId;
 	private String suggestionId;
-	// mozes status da prebacis u enum
 	private String status;
 	public String getCompanyId() {
 		return companyId;

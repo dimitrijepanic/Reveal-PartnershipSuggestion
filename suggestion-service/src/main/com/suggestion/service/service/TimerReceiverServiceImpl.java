@@ -1,10 +1,5 @@
 package com.suggestion.service.service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.suggestion.service.adapter.GrowthAdapter;
@@ -19,7 +14,6 @@ import com.suggestion.service.service.datatransfer.DataTransferEmail;
 import com.suggestion.service.service.datatransfer.DataTransferResponse;
 import com.suggestion.service.service.datatransfer.Outcome;
 
-import redis.clients.jedis.JedisPooled;
 
 public class TimerReceiverServiceImpl implements TimerReceiverService {
 
@@ -51,12 +45,10 @@ public class TimerReceiverServiceImpl implements TimerReceiverService {
 			return response;
 		}
 		
-		// maybe add the completed suggestions
 		company.setSuggestions(suggestionIds);
 		
 		DataTransferEmail dataTransferEmail = growthAdapter.generateEmail(commandFactory.buildGetEmailCommand(timerEvent, company));
 
-		// sredi ovo
 		ResponsePayloadUtility.addDataTransferEmailResponse(response, dataTransferEmail);
 		if(dataTransferEmail == null) return response;
 		
@@ -67,7 +59,6 @@ public class TimerReceiverServiceImpl implements TimerReceiverService {
 		if(mailResponse == null || (!mailResponse.getOutcomes().get(0).equals(Outcome.SUCCESS))) {
 			return response;
 		}
-		
 		
 		Response responseTimerStartService = timerStartService.startNextTimer(company);
 		if(responseTimerStartService.equals(Response.SUCCESS)) {

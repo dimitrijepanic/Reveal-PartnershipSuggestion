@@ -24,10 +24,6 @@ import com.suggestion.service.adapter.TimerAdapter;
 
 public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingService {
 	
-	/*
-	 * write comments here
-	 * dependecy injection
-	 */
 	private CompanyAdapter companyAdapter;
 	private GrowthAdapter growthAdapter;
 	private PersistenceAdapter persistenceAdapter;
@@ -55,7 +51,6 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 	}
 	
 	public DataTransferResponse companyCreated(CompanyCreatedCommand companyCreatedCommand) {
-		// fly maybe? 
 		Company company = buildCompany(companyCreatedCommand);
 		DataTransferResponse response = new DataTransferResponse();
 
@@ -95,8 +90,6 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 		return response;
 	}
 	
-	
-	// vidi mozda neki company builder da iskoristis
 	private Company buildCompany(CompanyCreatedCommand companyCreatedCommand) {
 		return new Company(
 				companyCreatedCommand.getCompanyId(),
@@ -117,9 +110,8 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 		return timerEvents;
 	}
 	
-	// sredi posle
 	private Response addToCache(Company company, List<TimerEvent> timerEvents) {
-		// this should be a singleton
+		// no singleton - anti-pattern
 		Response r1 = cacheService.connect("localhost", 6379);
 		if(r1.ordinal() != 0) return r1;
 		

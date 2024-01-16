@@ -44,6 +44,4 @@ public class TimerStartServiceImpl implements TimerStartService {
 		if(responseTimer == null || responseTimer.getOutcomes().get(0) == Outcome.FAIL) return Response.FAIL;
 		return Response.SUCCESS;
 	}
-	
-	
 }
