@@ -14,6 +14,9 @@ import redis.clients.jedis.JedisPooled;
 
 public class RedisService implements CacheService {
 
+	private static int defaultPort = 6379;
+	private static String defaultHost = "localhost";
+	
 	private JedisPooled jedis;
 	/*
 	 * Add to the end of the list the current company suggestions
@@ -85,7 +88,7 @@ public class RedisService implements CacheService {
 	@Override
 	public Response connect() {
 		try {
-			this.jedis = new JedisPooled("localhost", 6379);
+			this.jedis = new JedisPooled(defaultHost, defaultPort);
 		} catch(Exception e) {
 			return Response.FAIL;
 		}
