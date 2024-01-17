@@ -32,8 +32,16 @@ It is important to note here is the Authentication done before? Is the Token alr
 I have written 26 tests to cover both the Functional and Unit aspects.
 ## Future Works
 * Service Registry
+  - Instead of utilizing dependency injection for Timer Start Service, it would make a lot more sense to have a Service Registry component so they can actually communicate properly
 * Docker
+  - Creating an image and deploying it would be a good next step
 * Horizontal Scaling
+  - Components were designed in a way to allow for easier horizontal scaling (increasing the number of nodes). For example if we saw that the Update Suggestion Service was doing a lot of work, we could always increase the number and add a Load Balancer to distribute the request. This goes in hand with the stateless architecture of the system.
+* Cache eviction policy
+  - Theoretically Redis can get full. However, the cache empties it self after there are no more emails to be sent, so actually only the recent requests will remain in the cache. With proper monitoring we could see if this is good enough.
+* SQL or NoSQL
+ - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
+    
 <!-- ## SQL or NoSQL Discussion
 
 * Updates
