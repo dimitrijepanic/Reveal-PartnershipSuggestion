@@ -41,12 +41,6 @@ I have written 26 tests to cover both the Functional and Unit aspects.
   - Theoretically Redis can get full. However, the cache empties it self after there are no more emails to be sent, so actually only the recent requests will remain in the cache. With proper monitoring we could see if this is good enough.
 * SQL or NoSQL
  - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
-    
-<!-- ## SQL or NoSQL Discussion
-
-* Updates
-  - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
-  - Updates (Writes) will occur more commonly than reads? -->
 
 ## How To Use
 For the external jars it is mandatory to import the project into the prefered environment.
