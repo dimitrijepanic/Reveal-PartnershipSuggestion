@@ -27,7 +27,6 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 	private CompanyAdapter companyAdapter;
 	private GrowthAdapter growthAdapter;
 	private PersistenceAdapter persistenceAdapter;
-	private TimerAdapter timerAdapter;
 	// the communication should go through a service registry but this is ok for now I think
 	private CacheService cacheService;
 	private TimerStartService timerStartService;
@@ -37,14 +36,12 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 			CompanyAdapter companyAdapter,
 			GrowthAdapter growthAdapter,
 			PersistenceAdapter persistenceAdapter,
-			TimerAdapter timerAdapter,
 			CommandFactory commandFactory,
 			CacheService cacheService,
 			TimerStartService timerStartService) {
 		this.companyAdapter = companyAdapter;
 		this.growthAdapter = growthAdapter;
 		this.persistenceAdapter = persistenceAdapter;
-		this.timerAdapter = timerAdapter;
 		this.commandFactory = commandFactory;
 		this.cacheService = cacheService;
 		this.timerStartService = timerStartService;
@@ -110,13 +107,14 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 		return timerEvents;
 	}
 	
+	// change this to not be ordinal
 	private Response addToCache(Company company, List<TimerEvent> timerEvents) {
 		// no singleton - anti-pattern
 		Response r1 = cacheService.connect("localhost", 6379);
-		if(r1.ordinal() != 0) return r1;
+		if(!r1.equals(Response.SUCCESS)) return r1;
 		
 		Response r2 = cacheService.addCompanySuggestions(company);
-		if(r2.ordinal() != 0) return r2;
+		if(!r2.equals(Response.SUCCESS)) return r2;
 		
 		Response r3 = cacheService.addTimerEvents(company, timerEvents);
 		return r3;

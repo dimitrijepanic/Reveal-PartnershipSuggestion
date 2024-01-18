@@ -11,8 +11,7 @@ import com.suggestion.service.service.datatransfer.DataTransferEmail;
 public class CommandFactory {
 	
 	// we can just do a switch based on it to clean it up, so we actually have a factory
-	
-
+	// not super smart, makes no sense
 	public SimilarCompaniesCommand buildSimilarCompaniesCommand(Company company) {
 		return new SimilarCompaniesCommand(company.getIndustry(),company.getCountry());
 	}
@@ -22,11 +21,9 @@ public class CommandFactory {
 		return new InsertSuggestionsCommand(company.getCompanyId(),company.getSuggestions());
 	}
 
-
 	public TimerEventsCommand buildTimerEventsCommand() {
 		return new TimerEventsCommand();
 	}
-
 
 	public TimerCommand buildTimerCommand(Company company, TimerEvent timerEvent) {
 		return new TimerCommand(company.getCompanyId(), timerEvent.getEmailType(), timerEvent.getTimestamp());

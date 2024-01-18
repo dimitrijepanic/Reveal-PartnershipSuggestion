@@ -88,7 +88,6 @@ public class SuggestionServiceTest {
 				companyAdapterMock,
 				new GrowthAdapter(),
 				new PersistenceAdapter(),
-				new TimerAdapter(),
 				new CommandFactory(),
 				new RedisService(),
 				new TimerStartServiceImpl(null, null, null)
@@ -115,7 +114,6 @@ public class SuggestionServiceTest {
 				companyAdapterMock,
 				new GrowthAdapter(),
 				new PersistenceAdapter(),
-				new TimerAdapter(),
 				new CommandFactory(),
 				new RedisService(),
 				new TimerStartServiceImpl(null, null, null)
@@ -149,7 +147,6 @@ public class SuggestionServiceTest {
 				companyAdapterMock,
 				new GrowthAdapter(),
 				persistenceAdapterMock,
-				new TimerAdapter(),
 				new CommandFactory(),
 				new RedisService(),
 				new TimerStartServiceImpl(null, null, null)
@@ -193,7 +190,6 @@ public class SuggestionServiceTest {
 				companyAdapterMock,
 				growthAdapterMock,
 				persistenceAdapterMock,
-				new TimerAdapter(),
 				new CommandFactory(),
 				new RedisService(),
 				new TimerStartServiceImpl(null, null, null)
@@ -241,7 +237,6 @@ public class SuggestionServiceTest {
 				companyAdapterMock,
 				growthAdapterMock,
 				persistenceAdapterMock,
-				new TimerAdapter(),
 				new CommandFactory(),
 				new RedisService(),
 				new TimerStartServiceImpl(null, null, null)

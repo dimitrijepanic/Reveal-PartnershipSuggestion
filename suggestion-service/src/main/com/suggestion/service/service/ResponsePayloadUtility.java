@@ -6,6 +6,10 @@ import com.suggestion.service.service.datatransfer.DataTransferEmail;
 import com.suggestion.service.service.datatransfer.DataTransferResponse;
 import com.suggestion.service.service.datatransfer.Outcome;
 
+/*
+ * Utility Class used to add action and command results to the DataTransfer
+ * that will be sent to the Adapter
+ */
 public class ResponsePayloadUtility {
 	
 	public static String[] resultMessages = {

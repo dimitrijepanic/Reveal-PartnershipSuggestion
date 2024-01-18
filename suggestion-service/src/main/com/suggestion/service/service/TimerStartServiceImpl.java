@@ -32,6 +32,9 @@ public class TimerStartServiceImpl implements TimerStartService {
 			return Response.NO_DATA;
 		}
 		
+		// this could be changed to extract information from the cache service
+		// it could be a strategy
+		// if you have time update it 
 		String[] values = value.split(":");
 		
 		DataTransferResponse responseTimer = 

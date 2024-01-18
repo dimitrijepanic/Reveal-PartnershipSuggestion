@@ -39,8 +39,9 @@ public class SuggestionUpdateServiceImpl implements SuggestionUpdateService {
 		ResponsePayloadUtility.addGeneralResponse(response, cacheResponse, 6);
 		if(cacheResponse.equals(Response.FAIL)) return response;
 		
-		DataTransferResponse responseDB = persistenceAdapter.updateSuggestionStatus(commandFactory.buildUpdateSuggestionStatusCommand(suggestion));  
+		DataTransferResponse responseDB = persistenceAdapter.updateSuggestionStatus(commandFactory.buildUpdateSuggestionStatusCommand(suggestion));
 		
+		// if unsuccessful we can have garbage in the cache	
 		ResponsePayloadUtility.addDataTransferResponse(response, responseDB);
 
 		return response;

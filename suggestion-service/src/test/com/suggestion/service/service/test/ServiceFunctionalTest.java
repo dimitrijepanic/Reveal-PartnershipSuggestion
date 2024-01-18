@@ -44,7 +44,7 @@ import com.suggestion.service.service.datatransfer.DataTransferTimerEvent;
 import com.suggestion.service.service.datatransfer.DataTransferTimerEventList;
 import com.suggestion.service.service.datatransfer.Outcome;
 
-public class ServiceIntegrationTest {
+public class ServiceFunctionalTest {
 
 	@Test
 	public void ServiceIntegrationTestComplete() {
@@ -96,7 +96,6 @@ public class ServiceIntegrationTest {
 				companyAdapterMock,
 				growthAdapterMock,
 				persistenceAdapterMock,
-				new TimerAdapter(),
 				new CommandFactory(),
 				cacheService,
 				timerStartService
