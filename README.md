@@ -50,7 +50,7 @@ Suggestion Update Service acknowledges the update and adds it to the cache, whil
 
 
 ## Testing 
-I have written 26 tests to cover both the Functional and Unit aspects.
+I have written 29 tests to cover both the Functional and Unit aspects.
 ## Future Works
 * Service Registry
   - Instead of utilizing dependency injection for Timer Start Service, it would make a lot more sense to have a Service Registry component so they can actually communicate properly
