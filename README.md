@@ -42,6 +42,8 @@ I have written 26 tests to cover both the Functional and Unit aspects.
 * SQL or NoSQL
   - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
   - Writes are more common than reads
+* Why not base Command and/or base Data Transfer
+  - It would not make much sense because practically every object is unique.. we could maybe make it just for the general result, however it seems like it is a bit overcoding
 
 ## How To Use
 For the external jars it is mandatory to import the project into the prefered environment.
