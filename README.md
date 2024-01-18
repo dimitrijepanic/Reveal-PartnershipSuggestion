@@ -22,7 +22,7 @@ Caching eviction policies should be further discussed, however nowaday Redis is 
 ## Suggestion Generating Service
 Suggestion Generating Service is the service that actually collects the suggestions, and then adds it to the Cache. Furthermore, it calls the Timer Start Service to start the timer for the first Email to be sent (possibly).
 <p align="center" width="100%">
-   <img width="33%" alt="suggestion_generating_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/e1305c7f-1b82-44a0-b1a8-9e22f99b55b3">
+   <img width="66%" alt="suggestion_generating_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/e1305c7f-1b82-44a0-b1a8-9e22f99b55b3">
 </p>
 
 > **_NOTE:_** In the diagram Command Factory and Response Payload Utility are not present - to reduce the overall complexity of the diagram I only kept the key points of the algorithm.
@@ -31,9 +31,20 @@ Suggestion Generating Service is the service that actually collects the suggesti
 Timer Receiver Service receives the command acknowledging the previous timer expiration. First it collects the list from the cache, then compares it to updates done since the last timer expired. If there is still a need to send the email, it will do so. Lastly, it will return the list to the cache, and schedule a new timer by calling the timer start service.
 ## Timer Start Service
 Creating a seperate service that start the timer was done so we would have the logic that is reused in multiple services in one place.
+<p align="center" width="100%">
+  <img width="66%" alt="timer_start_service" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/aec455f6-4bd8-439a-9183-1e9b0b545496">
+</p>
+
+
 ## Suggestion Update Service
 Suggestion Update Service acknowledges the update and adds it to the cache, while also persisting it to the DB.
-It is important to note here is the Authentication done before? Is the Token already checked? Are we in a private network? I presume all the answers are "Yes".
+<p align="center" width="100%">
+   <img width="66%" alt="suggestion_update_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/8390c3fc-9409-429c-bef9-5121849d6b0b">
+</p>
+
+> **_NOTE:_** It is important to note here is the Authentication done before? Is the Token already checked? Are we in a private network? I presume all the answers are "Yes".
+
+
 ## Testing 
 I have written 26 tests to cover both the Functional and Unit aspects.
 ## Future Works
@@ -48,7 +59,7 @@ I have written 26 tests to cover both the Functional and Unit aspects.
 * SQL or NoSQL
   - NoSQL will allow for faster reads, however since the DB is completely denormalized updating one recommendation we will have to fetch the complete file
   - Writes are more common than reads
-* Why not base Command and/or base Data Transfer
+* Why not base Command and/or base Data Transfer CLass
   - It would not make much sense because practically every object is unique.. we could maybe make it just for the general result, however it seems like it is a bit overcoding
 
 ## How To Use
