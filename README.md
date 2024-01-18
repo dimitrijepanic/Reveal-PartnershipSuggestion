@@ -31,6 +31,11 @@ Suggestion Generating Service is the service that actually collects the suggesti
 Timer Receiver Service receives the command acknowledging the previous timer expiration. First it collects the list from the cache, then compares it to updates done since the last timer expired. If there is still a need to send the email, it will do so. Lastly, it will return the list to the cache, and schedule a new timer by calling the timer start service.
 ## Timer Start Service
 Creating a seperate service that start the timer was done so we would have the logic that is reused in multiple services in one place.
+<p align="center" width="100%">
+  <img width="66%" alt="timer_start_service" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/aec455f6-4bd8-439a-9183-1e9b0b545496">
+</p>
+
+
 ## Suggestion Update Service
 Suggestion Update Service acknowledges the update and adds it to the cache, while also persisting it to the DB.
 <p align="center" width="100%">
