@@ -63,7 +63,7 @@ I have written 26 tests to cover both the Functional and Unit aspects.
   - It would not make much sense because practically every object is unique.. we could maybe make it just for the general result, however it seems like it is a bit overcoding
 
 ## How To Use
-For the external jars it is mandatory to import the project into the prefered environment.
+The Project uses external jars that need to be imported by Project -> Properties -> Java Build Path -> Classpath -> Add External Jars. 
 
 ```bash
 # To download and start Redis
