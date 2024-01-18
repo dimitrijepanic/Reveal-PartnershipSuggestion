@@ -21,6 +21,12 @@ It is used in 3 cases:
 Caching eviction policies should be further discussed, however nowaday Redis is even used as a full database.
 ## Suggestion Generating Service
 Suggestion Generating Service is the service that actually collects the suggestions, and then adds it to the Cache. Furthermore, it calls the Timer Start Service to start the timer for the first Email to be sent (possibly).
+<p align="center" width="100%">
+   <img width="33%" alt="suggestion_generating_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/e1305c7f-1b82-44a0-b1a8-9e22f99b55b3">
+</p>
+
+> **_NOTE:_** In the diagram Command Factory and Response Payload Utility are not present - to reduce the overall complexity of the diagram I only kept the key points of the algorithm.
+
 ## Timer Receiver Service
 Timer Receiver Service receives the command acknowledging the previous timer expiration. First it collects the list from the cache, then compares it to updates done since the last timer expired. If there is still a need to send the email, it will do so. Lastly, it will return the list to the cache, and schedule a new timer by calling the timer start service.
 ## Timer Start Service
