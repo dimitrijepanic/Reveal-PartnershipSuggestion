@@ -22,7 +22,7 @@ Caching eviction policies should be further discussed, however nowaday Redis is 
 ## Suggestion Generating Service
 Suggestion Generating Service is the service that actually collects the suggestions, and then adds it to the Cache. Furthermore, it calls the Timer Start Service to start the timer for the first Email to be sent (possibly).
 <p align="center" width="100%">
-   <img width="33%" alt="suggestion_generating_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/e1305c7f-1b82-44a0-b1a8-9e22f99b55b3">
+   <img width="66%" alt="suggestion_generating_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/e1305c7f-1b82-44a0-b1a8-9e22f99b55b3">
 </p>
 
 > **_NOTE:_** In the diagram Command Factory and Response Payload Utility are not present - to reduce the overall complexity of the diagram I only kept the key points of the algorithm.
