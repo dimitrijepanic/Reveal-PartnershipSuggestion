@@ -15,5 +15,6 @@ public interface CacheService {
 	public Response updateSuggestion(Suggestion suggestion);
 	public List<String> getCurrentSuggestions(Company company);
 	public Object getNextTimerEvent(Company company);
+	public String[] extractEmailTime(String value);
 	public void clearCache();
 }

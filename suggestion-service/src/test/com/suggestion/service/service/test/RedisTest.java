@@ -135,4 +135,14 @@ public class RedisTest {
 		
 	}
 	
+	@Test
+	public void extractEmailTimeTest() {
+		CacheService cacheService = new RedisService();
+		String[] result = cacheService.extractEmailTime("3:3600");
+		
+		assertNotNull(result);
+		assertEquals(result[0], "3");
+		assertEquals(result[1], "3600");
+	}
+	
 }

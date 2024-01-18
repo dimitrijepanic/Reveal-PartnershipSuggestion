@@ -145,4 +145,9 @@ public class RedisService implements CacheService {
 		}
 	}
 
+	@Override
+	public String[] extractEmailTime(String value) {
+		return value.split(":");
+	}
+
 }
