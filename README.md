@@ -36,6 +36,7 @@ Suggestion Update Service acknowledges the update and adds it to the cache, whil
 <p align="center" width="100%">
    <img width="33%" alt="suggestion_update_sequence" src="https://github.com/dimitrijepanic/Reveal-PartnershipSuggestion/assets/82520610/8390c3fc-9409-429c-bef9-5121849d6b0b">
 </p>
+
 > **_NOTE:_** It is important to note here is the Authentication done before? Is the Token already checked? Are we in a private network? I presume all the answers are "Yes".
 
 
