@@ -65,6 +65,13 @@ I have written 29 tests to cover both the Functional and Unit aspects.
   - Writes are more common than reads
 * Why not base Command and/or base Data Transfer CLass
   - It would not make much sense because practically every object is unique.. we could maybe make it just for the general result, however it seems like it is a bit overcoding
+* System design important characterictics - with Analytics and Monitoring can be improved
+  - Availability - depends on the replicas we have and patterns used - not discussed at this point
+  - Consistency - this models works perfectly fine with eventual consistency (NoSQL), no need for strict ACID properties
+  - Reliability - depends a lot on the cache service and DB implementation
+  - Security - depends on the authentication and tokenization, also our domain logic can completely be in a private network
+  - Extensibility - high, can add any type of software that we need with minimal code change
+  - Robustness - depends on which part, but I would say system was designed with robustness in mind
 
 ## How To Use
 The Project uses external jars that need to be imported by Project -> Properties -> Java Build Path -> Classpath -> Add External Jars. 
