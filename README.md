@@ -70,7 +70,7 @@ I have written 29 tests to cover both the Functional and Unit aspects.
 The Project uses external jars that need to be imported by Project -> Properties -> Java Build Path -> Classpath -> Add External Jars. 
 
 ```bash
-# To download and start Redis
+# Download and install Redis
 $ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 
 $ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
@@ -80,3 +80,7 @@ $ sudo apt-get install redis
 
 ```
 
+```bash
+# Run Redis 
+$ redis-server
+```
