@@ -72,6 +72,7 @@ I have written 29 tests to cover both the Functional and Unit aspects.
   - Security - depends on the authentication and tokenization, also our domain logic can completely be in a private network
   - Extensibility - high, can add any type of software that we need with minimal code change
   - Robustness - depends on which part, but I would say system was designed with robustness in mind
+  - Asynchronous communication - can also be added for database writing since eventual consistency is fine in this use case
 
 ## How To Use
 The Project uses external jars that need to be imported by Project -> Properties -> Java Build Path -> Classpath -> Add External Jars. 
