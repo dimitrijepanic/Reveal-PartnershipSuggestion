@@ -110,6 +110,7 @@ public class RedisTest {
 		Company company = new Company("1");
 		String result = (String) cacheService.getNextTimerEvent(company);
 		
+		cacheService.clearCache();
 		assertNotNull(result);
 		assertEquals(result, "2:3600");
 	}

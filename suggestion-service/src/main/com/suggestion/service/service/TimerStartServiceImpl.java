@@ -28,13 +28,18 @@ public class TimerStartServiceImpl implements TimerStartService {
 		cacheService.connect();
 		String value = (String) cacheService.getNextTimerEvent(company);
 
+		// if we have already done the last timer event 
+		// just return from the method
 		if(value == null || value == "") {
 			return Response.NO_DATA;
 		}
 		
-		// it could be a strategy
+		// this can be a strategy for the way we extract information from the key
+		// update it if you have time
+		// however can be argued that it might be overcoding
 		String[] values = cacheService.extractEmailTime(value);
 		
+		// actually set the ticks and start the timer 
 		DataTransferResponse responseTimer = 
 				timerAdapter.setTimer(
 						commandFactory.buildTimerCommand(

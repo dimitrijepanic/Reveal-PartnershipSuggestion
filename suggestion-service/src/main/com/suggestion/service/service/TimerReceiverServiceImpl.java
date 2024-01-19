@@ -38,6 +38,9 @@ public class TimerReceiverServiceImpl implements TimerReceiverService {
 		TimerEvent timerEvent = buildTimerEvent(command);
 		Company company = new Company(command.getCompanyId());
 		DataTransferResponse response = new DataTransferResponse();
+		// collect the suggestions from the cache
+		// collect the updates from the cache
+		// compare them and use the difference
 		List<String> suggestionIds = getCacheSuggestions(company);
 		
 		ResponsePayloadUtility.addResponseList(response, suggestionIds == null, suggestionIds == null ? -1 : suggestionIds.size(), company , 10);
@@ -47,11 +50,13 @@ public class TimerReceiverServiceImpl implements TimerReceiverService {
 		
 		company.setSuggestions(suggestionIds);
 		
+		// generate the email that needs to be sent
 		DataTransferEmail dataTransferEmail = growthAdapter.generateEmail(commandFactory.buildGetEmailCommand(timerEvent, company));
 
 		ResponsePayloadUtility.addDataTransferEmailResponse(response, dataTransferEmail);
 		if(dataTransferEmail == null) return response;
 		
+		// actually tell the responsible service to send the email
 		Email email = buildEmail(dataTransferEmail);
 		DataTransferResponse mailResponse = mailerAdapter.sendEmail(commandFactory.buildSendEmailCommand(email));
 
@@ -60,6 +65,8 @@ public class TimerReceiverServiceImpl implements TimerReceiverService {
 			return response;
 		}
 		
+		// call the service to set the timer
+		// dependecy injection not the best solution!
 		Response responseTimerStartService = timerStartService.startNextTimer(company);
 		if(responseTimerStartService.equals(Response.SUCCESS)) {
 			addSuggestionsToCache(company);

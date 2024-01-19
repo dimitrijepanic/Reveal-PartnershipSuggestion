@@ -1,6 +1,11 @@
 package com.suggestion.service.domain;
 
-// mozda da izvedes iz ovoga novi timer event
+/*
+ * Domain Object used ONLY in the Domain Logic and/or communication
+ * between different services
+ * Has to be transformed into a Command before sending to the adapter
+ * Used to represent a Timer Event Entity
+ */
 public class TimerEvent {
 	private String companyId;
 	private int emailType;

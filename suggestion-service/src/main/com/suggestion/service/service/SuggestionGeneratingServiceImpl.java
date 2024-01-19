@@ -50,7 +50,7 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 	public DataTransferResponse companyCreated(CompanyCreatedCommand companyCreatedCommand) {
 		Company company = buildCompany(companyCreatedCommand);
 		DataTransferResponse response = new DataTransferResponse();
-
+		// get the similar companies based on the company received through the command
 		DataTransferCompanies dataTransferCompanies = companyAdapter.requestSimilarCompanies(commandFactory.buildSimilarCompaniesCommand(company)); 	
 		
 		List<String> suggestions = dataTransferCompanies.getSuggestions();
@@ -61,6 +61,8 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 		} 
 		
 		company.setSuggestions(dataTransferCompanies.getSuggestions());
+		// save to DB the similar companies 
+		// pk(companyId, suggestionId), timestamp
 		// we expect the default of the DB to be status = pending
 		DataTransferResponse responseDB = persistenceAdapter.saveCompanySuggestions(commandFactory.buildInsertSuggestionsCommand(company));
 		
@@ -69,6 +71,7 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 			return response;
 		} 
 	
+		// get the policy and plan for sending emails 
 		DataTransferTimerEventList dataTransferList = growthAdapter.getTimerEvents(commandFactory.buildTimerEventsCommand());
 		List<TimerEvent> timerEvents = extractTimerEvents(dataTransferList.getDataTransferTimerEvents());
 		ResponsePayloadUtility.addResponseList(response, timerEvents == null, timerEvents != null ? timerEvents.size() : -1, company, 3);
@@ -76,11 +79,15 @@ public class SuggestionGeneratingServiceImpl implements SuggestionGeneratingServ
 			return response;
 		}
 
+		// add the timer events to cache (in reverse order)
+		// add the suggestion list to the cache
 		Response responseCache = addToCache(company, timerEvents);
 		
 		ResponsePayloadUtility.addGeneralResponse(response, responseCache, 6);
 		if(!responseCache.equals(Response.SUCCESS)) return response;
 		
+		// call the timer service to start the timer
+		// would be better if there existed a service registry
 		Response responseTimerStartService = timerStartService.startNextTimer(company);
 		ResponsePayloadUtility.addGeneralResponse(response, responseTimerStartService, 8);
 		

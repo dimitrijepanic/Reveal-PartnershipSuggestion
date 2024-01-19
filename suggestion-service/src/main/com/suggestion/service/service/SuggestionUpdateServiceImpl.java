@@ -11,6 +11,11 @@ import com.suggestion.service.service.datatransfer.Outcome;
 
 import redis.clients.jedis.JedisPooled;
 
+/*
+ * expected this service to experience the highest load
+ * for that reason the goal with the cache service and the 
+ * actions performed but the update service is completely non-blocking
+ */
 public class SuggestionUpdateServiceImpl implements SuggestionUpdateService {
 
 	private PersistenceAdapter persistenceAdapter;
@@ -26,22 +31,29 @@ public class SuggestionUpdateServiceImpl implements SuggestionUpdateService {
 		this.cacheService = cacheService;
 	}
 
-	/*
-	 * 
-	 */
 	@Override
 	public DataTransferResponse updateSuggestion(UpdateSuggestionCommand command) {
 		Suggestion suggestion = buildSuggestion(command);
 		DataTransferResponse response = new DataTransferResponse();
 		
+		// just append to the back of the list the update that had been done
+		// code is pretty robust
+		// code will still work no matter the number of updates
+		// code is completely thread-safe (because of redis's nature)
+		// if multiple updates are sent all of them will be saved to the 
+		// cache, however the decision was this is ok -- for the latency
 		Response cacheResponse =  cacheUpdate(suggestion);
 		
 		ResponsePayloadUtility.addGeneralResponse(response, cacheResponse, 6);
 		if(cacheResponse.equals(Response.FAIL)) return response;
 		
+		// insert to the DB the update of the suggestion
 		DataTransferResponse responseDB = persistenceAdapter.updateSuggestionStatus(commandFactory.buildUpdateSuggestionStatusCommand(suggestion));
 		
 		// if unsuccessful we can have garbage in the cache	
+		// however the probability of that happening is low
+		// so having one (value, key) is not such an issue as it will be cleaned up
+		// afterwards
 		ResponsePayloadUtility.addDataTransferResponse(response, responseDB);
 
 		return response;

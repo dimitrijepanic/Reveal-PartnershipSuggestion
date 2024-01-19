@@ -2,7 +2,12 @@ package com.suggestion.service.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+ * Domain Object used ONLY in the Domain Logic and/or communication
+ * between different services
+ * Has to be transformed into a Command before sending to the adapter
+ * Used to represent a Company Entity
+ */
 public class Company {
 	
 	private String companyId;

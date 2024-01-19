@@ -1,6 +1,6 @@
 package com.suggestion.service.domain;
 
-// adapter does the authentication & tokenization
+// Adapter does the authentication & tokenization
 public class Suggestion {
 	private String companyId;
 	private String suggestionId;

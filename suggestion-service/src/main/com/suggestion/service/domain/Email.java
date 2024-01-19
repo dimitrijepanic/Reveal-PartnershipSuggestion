@@ -1,5 +1,11 @@
 package com.suggestion.service.domain;
 
+/*
+ * Domain Object used ONLY in the Domain Logic and/or communication
+ * between different services
+ * Has to be transformed into a Command before sending to the adapter
+ * Used to represent an Email Entity
+ */
 public class Email {
 	String recipient;
 	String content;
